@@ -139,21 +139,21 @@ const ws = new WebSocket('ws://localhost:3000');
 ```json
 {
   "type": "INITIAL_COUNT",
-  "count": 42  // Stories in last 5 minutes
+  "count": 42  # Stories in last 5 minutes
 }
 ```
 
 2. Request Recent Stories:
 ```json
-// Send
+# Send
 {
   "type": "REQUEST_STORIES"
 }
 
-// Receive
+# Receive
 {
   "type": "RECENT_STORIES",
-  "stories": [/* array of stories */]
+  "stories": [] # array of stories
 }
 ```
 
@@ -161,7 +161,7 @@ const ws = new WebSocket('ws://localhost:3000');
 ```json
 {
   "type": "NEW_STORY",
-  "story": {/* story object */}
+  "story": {} # stories object
 }
 ```
 
