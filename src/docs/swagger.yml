@@ -1,0 +1,170 @@
+openapi: 3.0.0
+info:
+  title: Hacker News Scraper API
+  description: API documentation for the real-time Hacker News scraper
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+paths:
+  /api/stories/recent-count:
+    get:
+      summary: Get the count of recent stories
+      description: Returns the number of stories scraped in the last 5 minutes.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+  /api/stories:
+    get:
+      summary: Get paginated stories
+      description: Retrieves a paginated list of stories.
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stories:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Story'
+  /api/stories/by-date:
+    get:
+      summary: Get stories by date range
+      description: Retrieves stories within a specified date range.
+      parameters:
+        - name: startDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stories:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Story'
+  /api/stories/{id}:
+    get:
+      summary: Get story by ID
+      description: Retrieves a single story by its ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '404':
+          description: Story not found
+  /api/stories/stats/summary:
+    get:
+      summary: Get stories statistics
+      description: Retrieves statistics on scraped stories.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalStories:
+                    type: integer
+                  averagePoints:
+                    type: number
+                  highestPoints:
+                    type: integer
+                  lowestPoints:
+                    type: integer
+                  averageComments:
+                    type: number
+                  highestComments:
+                    type: integer
+                  lowestComments:
+                    type: integer
+                  topAuthors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        stories:
+                          type: integer
+                  mostCommentedStories:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        author:
+                          type: string
+                        commentsCount:
+                          type: integer
+components:
+  schemas:
+    Story:
+      type: object
+      properties:
+        id:
+          type: integer
+        hackerNewsId:
+          type: integer
+        title:
+          type: string
+        url:
+          type: string
+        points:
+          type: integer
+        author:
+          type: string
+        commentsCount:
+          type: integer
+        comments:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time

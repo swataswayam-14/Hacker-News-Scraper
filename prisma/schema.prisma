@@ -1,0 +1,24 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Story {
+  id            Int      @id @default(autoincrement())
+  hackerNewsId  Int      @unique @map("hacker_news_id")
+  title         String
+  url           String?
+  points        Int      @default(0)
+  author        String   @default("")
+  createdAt     DateTime @default(now()) @map("created_at")
+  commentsCount Int      @default(0) 
+  comments      String[] @default([])  
+
+  @@map("stories")
+  @@index([createdAt])
+  @@index([hackerNewsId])
+}
