@@ -22,7 +22,7 @@ A Node.js service that scrapes Hacker News stories in real-time and provides bot
 
 1. Clone the repository:
 ```bash
-git clone <>
+git clone `https://github.com/swataswayam-14/Hacker-News-Scraper.git`
 cd hacker-news-scraper
 ```
 
@@ -84,6 +84,12 @@ Response:
       "url": "https://example.com",
       "points": 100,
       "author": "user123",
+      "commentsCount": 10,
+      "comments": [
+        "first comment",
+        "second comment"
+        ...
+      ],
       "createdAt": "2024-01-19T12:00:00Z"
     }
   ],
@@ -94,6 +100,7 @@ Response:
     "pages": 10
   }
 }
+
 ```
 
 #### Get Stories by Date Range
