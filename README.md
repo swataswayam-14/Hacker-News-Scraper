@@ -88,7 +88,6 @@ Response:
       "comments": [
         "first comment",
         "second comment"
-        ...
       ],
       "createdAt": "2024-01-19T12:00:00Z"
     }
@@ -135,11 +134,12 @@ const ws = new WebSocket('ws://localhost:3000');
 
 #### Message Types
 
+##### Stories in last 5 minutes
 1. Initial Connection Response:
 ```json
 {
   "type": "INITIAL_COUNT",
-  "count": 42  # Stories in last 5 minutes
+  "count": 42 
 }
 ```
 
@@ -153,7 +153,7 @@ const ws = new WebSocket('ws://localhost:3000');
 # Receive
 {
   "type": "RECENT_STORIES",
-  "stories": [] # array of stories
+  "stories": [] 
 }
 ```
 
@@ -161,7 +161,7 @@ const ws = new WebSocket('ws://localhost:3000');
 ```json
 {
   "type": "NEW_STORY",
-  "story": {} # stories object
+  "story": {} 
 }
 ```
 
